@@ -1,0 +1,4099 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu | Masala Hut</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo_clean_resized.png">
+  <link rel="shortcut icon" href="logo_clean_resized.png">
+  <link rel="apple-touch-icon" href="logo_clean_resized.png">
+  <style>
+    :root {
+      --bg-black: #000000;
+      --char: #1c140f;
+      --ember: #d9601d;
+      --ember-light: #f0894a;
+      --chili: #b7291b;
+      --gold: #e8a93d;
+      --cream: #f4e9d8;
+      --cream-dim: rgba(244, 233, 216, 0.74);
+      --cream-faint: rgba(244, 233, 216, 0.4);
+      --olive: #6b5a42;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    html,
+    body {
+      height: 100%;
+      background: var(--bg-black);
+      font-family: 'Poppins', sans-serif;
+      color: var(--cream);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    @keyframes navDropIn {
+      from {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heroFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(26px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px clamp(20px, 4vw, 56px);
+      background: transparent;
+      backdrop-filter: blur(0px);
+      box-shadow: none;
+      animation: navDropIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 0.15s;
+      transition: background 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        padding 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        backdrop-filter 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nav.is-scrolled {
+      background: transparent;
+      backdrop-filter: none;
+      box-shadow: none;
+      padding: 8px clamp(20px, 4vw, 56px);
+    }
+
+    .nav__brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav__brand-link {
+      display: flex;
+      align-items: center;
+      line-height: 0;
+    }
+
+    .nav__brand img {
+      height: 170px;
+      width: auto;
+      display: block;
+      transition: height 0.35s ease;
+    }
+
+    .nav.is-scrolled .nav__brand img {
+      height: 140px;
+    }
+
+    @media (max-width:600px) {
+      .nav__brand img {
+        height: 112px;
+      }
+
+      .nav.is-scrolled .nav__brand img {
+        height: 104px;
+      }
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 2.6vw, 38px);
+      list-style: none;
+    }
+
+    .nav__links a:not(.nav__order-btn) {
+      position: relative;
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      padding-bottom: 6px;
+      transition: color 0.25s ease;
+    }
+
+    .nav__links a:not(.nav__order-btn)::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: 0;
+      height: 1.5px;
+      background: var(--ember-light);
+      transition: right 0.28s ease;
+    }
+
+    .nav__links a:not(.nav__order-btn):hover {
+      color: var(--cream);
+    }
+
+    .nav__links a:not(.nav__order-btn):hover::after {
+      right: 0;
+    }
+
+    .nav__links a.is-active {
+      color: var(--cream);
+    }
+
+    .nav__links a.is-active::after {
+      right: 0;
+      background: var(--gold);
+    }
+
+    .nav__order-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: clamp(12px, 2vw, 24px);
+      padding: 12px 24px;
+      line-height: 1;
+      text-align: center;
+      background: linear-gradient(135deg, var(--ember) 0%, var(--chili) 100%);
+      color: var(--cream);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(217, 96, 29, 0.35);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .nav__toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .nav__toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--cream);
+      display: block;
+    }
+
+    .nav__close-item {
+      display: none;
+    }
+
+    .nav__order-btn-mobile {
+      display: none;
+    }
+
+    /* ---------- MOBILE NAV ---------- */
+    @media (max-width:860px) {
+      .nav__close-item {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        position: absolute;
+        top: 16px;
+        right: 16px;
+      }
+
+      .nav__close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(244, 233, 216, 0.08);
+        border: 1px solid rgba(244, 233, 216, 0.18);
+        border-radius: 50%;
+        color: var(--cream);
+        font-size: 1.6rem;
+        line-height: 1;
+        cursor: pointer;
+        transition: background 0.25s ease, transform 0.25s ease;
+      }
+
+      .nav__close:hover {
+        background: rgba(244, 233, 216, 0.16);
+        transform: rotate(90deg);
+      }
+
+      .nav__links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: min(78vw, 320px);
+        background: rgba(15, 10, 7, 0.97);
+        backdrop-filter: blur(6px);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 28px;
+        padding: 40px;
+        transform: translateX(100%);
+        transition: transform 0.35s ease;
+        z-index: 20;
+      }
+
+      .nav__links.open {
+        transform: translateX(0);
+      }
+
+      .nav__toggle {
+        display: flex;
+        order: 2;
+      }
+
+      /* Hide the Order Online button from nav__links on mobile */
+      .nav__links .nav__order-btn {
+        display: none;
+      }
+
+      /* Show and style the mobile order button */
+      .nav__order-btn-mobile {
+        display: inline-flex;
+        order: 1;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 16px;
+        background: linear-gradient(135deg, var(--ember) 0%, var(--chili) 100%);
+        color: var(--cream);
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-decoration: none;
+        border-radius: 6px;
+        box-shadow: 0 4px 14px rgba(217, 96, 29, 0.35);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        white-space: nowrap;
+        margin: 0 8px 0 auto;
+      }
+
+      .nav__order-btn-mobile:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(217, 96, 29, 0.45);
+      }
+
+      .nav__order-btn-mobile:active {
+        transform: translateY(0);
+      }
+    }
+
+    /* ---------- GALLERY HERO ---------- */
+    .menu-hero {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes heroBgPan {
+      0% {
+        transform: scale(1.06) translate3d(0, 0, 0);
+      }
+
+      100% {
+        transform: scale(1.16) translate3d(-1.2%, -1.6%, 0);
+      }
+    }
+
+    @keyframes heroFadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes cueBob {
+
+      0%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.55;
+      }
+
+      50% {
+        transform: translateY(8px);
+        opacity: 1;
+      }
+    }
+
+    .menu-hero__bg {
+      position: absolute;
+      inset: 0;
+      animation: heroBgPan 22s ease-in-out infinite alternate;
+      will-change: transform;
+      background-image: url('https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg');
+      background-size: cover;
+      background-position: center 42%;
+      filter: saturate(1.05);
+    }
+
+    .menu-hero__scrim {
+      position: absolute;
+      inset: 0;
+      animation: heroFadeIn 1.6s ease both;
+      background:
+        radial-gradient(ellipse 60% 55% at 50% 46%, rgba(10, 7, 5, 0.7) 0%, rgba(10, 7, 5, 0.34) 45%, rgba(10, 7, 5, 0) 70%),
+        linear-gradient(180deg, rgba(8, 5, 3, 0.86) 0%, rgba(8, 5, 3, 0.36) 18%, rgba(8, 5, 3, 0.22) 55%, rgba(8, 5, 3, 0.6) 84%, rgba(8, 5, 3, 0.94) 100%);
+    }
+
+    .menu-hero__content {
+      position: relative;
+      z-index: 5;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 0;
+    }
+
+    .menu-hero__crumb {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--cream-faint);
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 0.3s;
+    }
+
+    .menu-hero__crumb a {
+      color: var(--cream-dim);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    .menu-hero__crumb a:hover {
+      color: var(--gold);
+    }
+
+    .menu-hero__crumb span {
+      color: var(--gold);
+    }
+
+    .menu-hero__kicker {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 22px;
+      opacity: 0;
+      animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 0.5s;
+    }
+
+    .menu-hero__title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.045em;
+      font-size: clamp(1.7rem, 3.4vw, 3.1rem);
+      line-height: 1.28;
+      max-width: 18ch;
+      color: var(--cream);
+      text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      animation: heroFadeUp 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 0.68s;
+    }
+
+    .menu-hero__title em {
+      font-style: normal;
+      font-weight: 400;
+      color: var(--ember-light);
+    }
+
+    .menu-hero__sub {
+      margin-top: 28px;
+      max-width: 46ch;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      letter-spacing: 0.015em;
+      color: var(--cream-dim);
+      font-weight: 300;
+      opacity: 0;
+      animation: heroFadeUp 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 0.86s;
+    }
+
+    .menu-hero__divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 36px;
+      opacity: 0;
+      animation: heroFadeUp 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: 1s;
+    }
+
+    .menu-hero__divider span {
+      display: block;
+      width: 46px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+
+    .menu-hero__divider span:last-child {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .menu-hero__divider em {
+      font-style: normal;
+      color: var(--gold);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .menu-hero__cue {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin: 0 auto 34px;
+      color: var(--cream-faint);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: heroFadeUp 1s ease both, cueBob 2.6s ease-in-out infinite;
+      animation-delay: 1.15s, 2s;
+    }
+
+    .menu-hero__cue .line {
+      width: 1px;
+      height: 34px;
+      background: linear-gradient(180deg, var(--cream-faint), transparent);
+    }
+
+    @media (max-width:480px) {
+      .menu-hero__title {
+        max-width: 16ch;
+      }
+    }
+
+    @media (max-width:860px) {
+      .menu-hero__content {
+        padding-top: 100px;
+      }
+    }
+
+    /* ---------- MENU SECTION ---------- */
+    .menu-section {
+      position: relative;
+      padding: 64px clamp(20px, 4vw, 56px) 72px;
+      background: var(--bg-black);
+      overflow: hidden;
+    }
+
+    @media (max-width:640px) {
+      .menu-section {
+        padding: 48px 16px 56px;
+      }
+    }
+
+    @media (max-width:480px) {
+      .menu-section {
+        padding: 40px 12px 48px;
+      }
+    }
+
+    /* ---------- SCROLL FADE-UP ---------- */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .fade-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---------- SITE WATERMARK (fixed, pinned to viewport) ---------- */
+    .site-watermark {
+      position: fixed;
+      inset: 0;
+      background-image: url('logo_clean_resized.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 620px auto;
+      opacity: 0.16;
+      pointer-events: none;
+      z-index: 1;
+      transition: opacity 0.35s ease;
+    }
+
+    .site-watermark.is-hidden {
+      opacity: 0;
+    }
+
+    @media (max-width:700px) {
+      .site-watermark {
+        background-size: 320px auto;
+      }
+    }
+
+    .menu-section__intro,
+    .menu-grid,
+    .price-table {
+      position: relative;
+      z-index: 2;
+    }
+
+    .menu-section__intro {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 40px;
+    }
+
+    .menu-section__kicker {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--ember);
+      margin-bottom: 12px;
+    }
+
+    .menu-section__title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      color: var(--cream);
+    }
+
+    .menu-section__title--main {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      color: var(--cream);
+    }
+
+    /* ---------- MENU TYPE TOGGLE ---------- */
+    .menu-toggle-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 8px 20px 48px;
+    }
+
+    .menu-toggle {
+      display: inline-flex;
+      gap: 6px;
+      padding: 6px;
+      background: rgba(244, 233, 216, 0.06);
+      border: 1px solid rgba(244, 233, 216, 0.16);
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+    }
+
+    .menu-toggle__btn {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: var(--cream-dim);
+      background: transparent;
+      padding: 11px 28px;
+      border-radius: 999px;
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .menu-toggle__btn:hover {
+      color: var(--cream);
+    }
+
+    .menu-toggle__btn.is-active {
+      color: var(--cream);
+      background: linear-gradient(135deg, var(--ember) 0%, var(--chili) 100%);
+      box-shadow: 0 4px 14px rgba(217, 96, 29, 0.35);
+    }
+
+    .menu-toggle__btn:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .menu-group[hidden] {
+      display: none;
+    }
+
+    @media (max-width:600px) {
+      .menu-toggle-wrap {
+        padding: 8px 12px 36px;
+      }
+
+      .menu-toggle {
+        display: flex;
+        width: 100%;
+        max-width: 420px;
+        gap: 4px;
+        padding: 4px;
+      }
+
+      .menu-toggle__btn {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 10px 4px;
+        font-size: 0.8rem;
+        letter-spacing: 0;
+        line-height: 1.2;
+        white-space: normal;
+        text-align: center;
+      }
+    }
+
+    @media (max-width:360px) {
+      .menu-toggle__btn {
+        font-size: 0.72rem;
+        padding: 9px 2px;
+      }
+    }
+
+    .menu-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px 64px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .menu-grid .menu-card {
+      flex: 1 1 420px;
+      max-width: 480px;
+    }
+
+    .menu-card__heading {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 1.3rem;
+      color: var(--cream);
+      text-align: center;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+
+    }
+
+    .menu-card__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-card__item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 0;
+    }
+
+    .menu-card__name {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      font-family: 'Times New Roman', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: #FFFFFF;
+    }
+
+    .menu-card__price {
+      font-family: 'Times New Roman', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+
+    /* ---------- PRICE TABLE (multi-size items) ---------- */
+    .price-table {
+      max-width: 1000px;
+      margin: 0 auto 64px;
+    }
+
+    .price-table__headrow {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 0 0 10px;
+
+      margin-bottom: 6px;
+    }
+
+    .price-table__headrow span {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ember);
+    }
+
+    .price-table__name-col {
+      flex: 1 1 auto;
+    }
+
+    .price-table__price-col {
+      flex: 0 0 100px;
+      text-align: right;
+    }
+
+    .price-table__row {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      padding: 9px 0;
+    }
+
+    .price-table__name {
+      flex: 1 1 auto;
+      font-family: 'Times New Roman', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: #FFFFFF;
+    }
+
+    .price-table__price {
+      flex: 0 0 100px;
+      text-align: right;
+      font-family: 'Times New Roman', serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+
+    @media (max-width:640px) {
+      .price-table {
+        margin: 0 auto 48px;
+        padding: 0 6px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .price-table__headrow {
+        display: flex;
+        justify-content: space-between;
+        gap: 4px;
+        padding: 0 0 8px;
+
+        margin-bottom: 4px;
+        min-width: min-content;
+      }
+
+      .price-table__row {
+        display: flex;
+        justify-content: space-between;
+        gap: 4px;
+        padding: 7px 0;
+        min-width: min-content;
+      }
+
+      .price-table__name-col {
+        flex: 0 0 92px;
+        text-align: left;
+      }
+
+      .price-table__price-col {
+        flex: 0 0 58px;
+        text-align: center;
+      }
+
+      .price-table__headrow span {
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ember);
+      }
+
+      .price-table__name {
+        flex: 0 0 92px;
+        font-size: 1rem;
+        font-weight: 400;
+        color: #FFFFFF;
+        word-break: break-word;
+      }
+
+      .price-table__price {
+        flex: 0 0 58px;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #FFFFFF;
+        text-align: center;
+      }
+    }
+
+    @media (max-width:380px) {
+      .price-table__name-col,
+      .price-table__name {
+        flex-basis: 84px;
+      }
+
+      .price-table__price-col,
+      .price-table__price {
+        flex-basis: 52px;
+        font-size: 0.92rem;
+      }
+    }
+
+    @media (max-width:860px) {
+      .menu-grid {
+        gap: 36px;
+        padding: 0 20px;
+      }
+
+      .menu-grid .menu-card {
+        flex-basis: 100%;
+        max-width: 100%;
+      }
+
+      .menu-card__heading {
+        font-size: 1.2rem;
+        padding-bottom: 10px;
+        margin-bottom: 14px;
+      }
+
+      .menu-card__item {
+        padding: 7px 0;
+        gap: 12px;
+      }
+
+      .menu-card__name {
+        font-size: 1.3rem;
+      }
+
+      .menu-card__price {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width:640px) {
+      .menu-section {
+        padding: 40px 0;
+      }
+
+      .menu-section__intro {
+        margin: 0 auto 32px;
+        padding: 0 16px;
+      }
+
+      .menu-section__kicker {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+      }
+
+      .menu-section__title {
+        font-size: 1.5rem;
+      }
+
+      .menu-grid {
+        gap: 28px;
+        padding: 0 16px;
+      }
+
+      .menu-grid .menu-card {
+        flex-basis: 100%;
+      }
+
+      .menu-card__heading {
+        font-size: 1.1rem;
+        padding-bottom: 8px;
+        margin-bottom: 12px;
+      }
+
+      .menu-card__item {
+        gap: 10px;
+        padding: 6px 0;
+      }
+
+      .menu-card__name {
+        font-size: 1.2rem;
+      }
+
+      .menu-card__price {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width:480px) {
+      .menu-section {
+        padding: 32px 0;
+      }
+
+      .menu-section__intro {
+        margin: 0 auto 24px;
+        padding: 0 12px;
+      }
+
+      .menu-section__title {
+        font-size: 1.4rem;
+      }
+
+      .menu-grid {
+        gap: 20px;
+        padding: 0 12px;
+      }
+
+      .menu-card__heading {
+        font-size: 1.05rem;
+      }
+
+      .menu-card__item {
+        gap: 8px;
+        padding: 5px 0;
+      }
+
+      .menu-card__name {
+        font-size: 1.15rem;
+      }
+
+      .menu-card__price {
+        font-size: 1.15rem;
+      }
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      position: relative;
+      background-image: url('https://images.pexels.com/photos/8629103/pexels-photo-8629103.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .footer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 7, 4, 0.75);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .footer__frame {
+      position: relative;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0;
+      z-index: 1;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      align-items: start;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer__nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      padding: 60px 40px;
+      background: transparent;
+      min-height: 400px;
+    }
+
+    .footer__main {
+      padding: 60px 40px;
+      background: transparent;
+      text-align: center;
+      border-left: none;
+      border-right: none;
+      min-height: 400px;
+    }
+
+    .footer__social {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      padding: 60px 40px;
+      background: transparent;
+      text-align: right;
+      align-items: flex-end;
+      min-height: 400px;
+    }
+
+    .footer__nav a {
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.25s ease;
+    }
+
+    .footer__nav a:hover {
+      color: var(--ember-light);
+    }
+
+    .footer__social a {
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.25s ease;
+    }
+
+    .footer__social a:hover {
+      color: var(--ember-light);
+    }
+
+    .footer__logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .footer__logo img {
+      max-width: 180px;
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+    }
+
+    @media (max-width:600px) {
+      .footer__logo img {
+        max-width: 130px;
+      }
+    }
+
+    .footer__brand-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-style: normal;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-size: 1.3rem;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .footer__info p {
+      color: var(--cream-dim);
+      font-size: 0.98rem;
+      line-height: 2;
+      font-weight: 400;
+    }
+
+    .footer__info strong {
+      color: var(--cream);
+      font-weight: 600;
+    }
+
+    .footer__nowrap {
+      white-space: nowrap;
+    }
+
+    .footer__hours {
+      margin-top: 4px;
+      font-size: 0.9rem;
+    }
+
+    .footer__bottom {
+      padding: 30px 40px;
+      border-top: none;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--cream-faint);
+      letter-spacing: 0.02em;
+      background: transparent;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer__bottom b {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    @media (max-width: 860px) {
+      .footer__grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .footer__nav,
+      .footer__main,
+      .footer__social {
+        padding: 40px 30px !important;
+        border: none !important;
+        min-height: auto !important;
+      }
+
+      .footer__nav,
+      .footer__social {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 15px 20px;
+      }
+
+      .footer__social {
+        text-align: center;
+        align-items: center;
+      }
+
+      .footer__logo {
+        margin-bottom: 20px;
+      }
+
+      .footer__info p {
+        line-height: 1.8;
+      }
+    }
+
+    /* ---------- FLOATING SOCIAL ICONS ---------- */
+    .social-float {
+      position: fixed;
+      top: 10px;
+      right: clamp(20px, 4vw, 56px);
+      z-index: 120;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 18px;
+      list-style: none;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .social-float.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-16px);
+    }
+
+    .social-float a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cream, #f4e9d8);
+      background: none;
+      border: 0;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    .social-float a:hover,
+    .social-float a:focus-visible {
+      color: var(--ember-light, #f0894a);
+      transform: translateY(-2px);
+    }
+
+    .social-float svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    @media (max-width: 600px) {
+      .social-float { gap: 14px; top: 8px; }
+      .social-float svg { width: 20px; height: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="site-watermark" aria-hidden="true"></div>
+
+  <section class="menu-hero">
+    <div class="menu-hero__bg"></div>
+    <div class="menu-hero__scrim"></div>
+
+    <nav class="nav">
+      <div class="nav__brand">
+        <a href="index.html" class="nav__brand-link">
+          <img src="logo_clean_resized.png" alt="Masala Hut logo" class="nav__logo">
+        </a>
+      </div>
+      <a href="https://masalahuts.cloveronline.com/menu/all" class="nav__order-btn-mobile">Order Online</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="navLinks">
+        <li class="nav__close-item">
+          <button class="nav__close" id="navClose" aria-label="Close menu">&times;</button>
+        </li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="https://masalahuts.cloveronline.com/menu/all" class="nav__order-btn">Order Online</a></li>
+      </ul>
+    </nav>
+
+    <div class="menu-hero__content">
+      <p class="menu-hero__crumb"><a href="index.html">Home</a> <span>&#8250;</span> Menu</p>
+      <p class="menu-hero__kicker">A Taste Of Masala Hut</p>
+      <h1 class="menu-hero__title">Flavors Worth <em>Savoring</em></h1>
+      <p class="menu-hero__sub">
+        From sizzling tandoor classics to slow-simmered curries — explore the dishes
+        that define Masala Hut.
+      </p>
+      <div class="menu-hero__divider">
+        <span></span>
+        <em>Our Menu</em>
+        <span></span>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <div class="menu-toggle-wrap">
+    <div class="menu-toggle" role="tablist" aria-label="Choose menu type">
+      <button type="button" class="menu-toggle__btn is-active" id="toggleDining" role="tab" aria-selected="true" aria-controls="menu-group-dining">Dining Menu</button>
+      <button type="button" class="menu-toggle__btn" id="toggleCatering" role="tab" aria-selected="false" aria-controls="menu-group-catering">Catering Menu</button>
+      <button type="button" class="menu-toggle__btn" id="toggleLive" role="tab" aria-selected="false" aria-controls="menu-group-live">Live Catering</button>
+    </div>
+  </div>
+
+  <div class="menu-group" id="menu-group-dining">
+
+  <section class="menu-section" id="dining-heading" style="padding-bottom:0;">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Masala Hut</p>
+      <h2 class="menu-section__title menu-section__title--main">Dining Menu</h2>
+    </div>
+  </section>
+
+  <section class="menu-section" id="dining-appetizers">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Starters</p>
+      <h2 class="menu-section__title">Appetizers</h2>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Veg</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Vegetable Samosa (2pcs)</span>
+            <span class="menu-card__price">$4.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Cocktail Samosa (5pcs)</span>
+            <span class="menu-card__price">$4.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Thai Veg Spring Rolls (2pcs)</span>
+            <span class="menu-card__price">$4.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Gobi Manchurian</span>
+            <span class="menu-card__price">$10.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chilli Paneer</span>
+            <span class="menu-card__price">$11.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Veg Manchurian</span>
+            <span class="menu-card__price">$9.99</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Non-Veg</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Egg Omelette</span>
+            <span class="menu-card__price">$5.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kada Mutta Masala</span>
+            <span class="menu-card__price">$10.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Beef Cutlet (2pcs)</span>
+            <span class="menu-card__price">$5.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Beef Meat Roll (2pcs)</span>
+            <span class="menu-card__price">$5.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken 65</span>
+            <span class="menu-card__price">$10.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken 75</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Hyderabadi Chicken 65</span>
+            <span class="menu-card__price">$13.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chilli Chicken Dry</span>
+            <span class="menu-card__price">$13.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Nadan Chicken Fry</span>
+            <span class="menu-card__price">$13.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Lollipop (5pcs)</span>
+            <span class="menu-card__price">$13.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Wings (6pcs)</span>
+            <span class="menu-card__price">$10.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Wings (6pcs) Combo</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chilli Garlic Shrimp</span>
+            <span class="menu-card__price">$15.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Anchovy Fry (Kozhuva/Netholi)</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Avoli Tawa Fry (White Pomfret)</span>
+            <span class="menu-card__price">$14.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">King Fish Tawa Fry</span>
+            <span class="menu-card__price">$14.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">French Fries</span>
+            <span class="menu-card__price">$3.99</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="dining-specials">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Chef's Picks</p>
+      <h2 class="menu-section__title">Masala Hut Specials</h2>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kerala Non-Veg Thali</span>
+            <span class="menu-card__price">$15.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kerala Veg Thali</span>
+            <span class="menu-card__price">$14.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kappa Biryani</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Paal Parotta with Beef</span>
+            <span class="menu-card__price">$16.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Paal Parotta with Chicken</span>
+            <span class="menu-card__price">$15.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Dosa Omelette Combo</span>
+            <span class="menu-card__price">$10.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kappa Pork Mix</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kappa</span>
+            <span class="menu-card__price">$9.99</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chilli Parotta</span>
+            <span class="menu-card__price">$9.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Chilli Parotta</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kothu Parotta with Egg</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kothu Parotta with Chicken</span>
+            <span class="menu-card__price">$14.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kothu Parotta with Beef</span>
+            <span class="menu-card__price">$14.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Puri Bhaji (3pcs)</span>
+            <span class="menu-card__price">$10.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Parotta with Beef &amp; Chicken 65 Combo</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="dining-main-course">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Mains</p>
+      <h2 class="menu-section__title">Main Course</h2>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Veg / Egg</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Paneer Butter Masala</span>
+            <span class="menu-card__price">$11.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Matar Paneer</span>
+            <span class="menu-card__price">$11.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Veg Kuruma (Korma)</span>
+            <span class="menu-card__price">$9.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chana Masala</span>
+            <span class="menu-card__price">$9.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Egg Curry (3pcs)</span>
+            <span class="menu-card__price">$9.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Egg Roast (3pcs)</span>
+            <span class="menu-card__price">$10.99</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Chicken</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Curry</span>
+            <span class="menu-card__price">$11.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Vindaloo</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Varutharacha</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Kadai</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Butter Chicken</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Tikka Masala</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Korma</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Beef / Pork</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Beef Curry</span>
+            <span class="menu-card__price">$14.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Beef Fry</span>
+            <span class="menu-card__price">$15.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Beef Roast</span>
+            <span class="menu-card__price">$15.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Pork Curry</span>
+            <span class="menu-card__price">$13.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Pork Fry</span>
+            <span class="menu-card__price">$14.99</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Goat</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Goat Korma</span>
+            <span class="menu-card__price">$15.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Goat Vindaloo</span>
+            <span class="menu-card__price">$15.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Goat Curry</span>
+            <span class="menu-card__price">$15.99</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Seafood</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Fish Curry (King Fish, 3pcs)</span>
+            <span class="menu-card__price">$9.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Shrimp Masala</span>
+            <span class="menu-card__price">$14.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Shrimp Tikka Masala</span>
+            <span class="menu-card__price">$13.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Shrimp Roast</span>
+            <span class="menu-card__price">$14.99</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="dining-biryani-dosa">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Rice &amp; Griddle</p>
+      <h2 class="menu-section__title">Biryani &amp; Dosa</h2>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Biryani</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Biryani</span>
+            <span class="menu-card__price">$10.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Goat Biryani</span>
+            <span class="menu-card__price">$14.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Shrimp Biryani</span>
+            <span class="menu-card__price">$14.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Veg Biryani</span>
+            <span class="menu-card__price">$9.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Beef Biryani (Weekend Special)</span>
+            <span class="menu-card__price">$15.99</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Dosa</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Thattu Dosa (3pcs)</span>
+            <span class="menu-card__price">$7.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Masala Dosa</span>
+            <span class="menu-card__price">$9.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Butter Dosa</span>
+            <span class="menu-card__price">$8.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Egg Dosa</span>
+            <span class="menu-card__price">$9.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Uthappam</span>
+            <span class="menu-card__price">$8.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Idli (3pcs)</span>
+            <span class="menu-card__price">$8.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Vada (2pcs)</span>
+            <span class="menu-card__price">$5.99</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="dining-rice-noodles">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Sides</p>
+      <h2 class="menu-section__title">Rice &amp; Noodles</h2>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kerala Rice</span>
+            <span class="menu-card__price">$3.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Plain Rice</span>
+            <span class="menu-card__price">$3.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Veg Fried Rice</span>
+            <span class="menu-card__price">$9.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Egg Fried Rice</span>
+            <span class="menu-card__price">$9.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Fried Rice</span>
+            <span class="menu-card__price">$10.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Shrimp Fried Rice</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Mixed Fried Rice</span>
+            <span class="menu-card__price">$13.99</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Veg Hakka Noodles</span>
+            <span class="menu-card__price">$10.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Egg Hakka Noodles</span>
+            <span class="menu-card__price">$10.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Hakka Noodles</span>
+            <span class="menu-card__price">$11.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Shrimp Hakka Noodles</span>
+            <span class="menu-card__price">$12.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Mixed Hakka Noodles</span>
+            <span class="menu-card__price">$13.99</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="dining-breads-desserts">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Sides &amp; Sweets</p>
+      <h2 class="menu-section__title">Breads &amp; Desserts</h2>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Breads</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kerala Parotta (1pc)</span>
+            <span class="menu-card__price">$1.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Appam (1pc)</span>
+            <span class="menu-card__price">$0.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chapati (1pc)</span>
+            <span class="menu-card__price">$1.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Puri (1pc)</span>
+            <span class="menu-card__price">$1.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Idiyappam (1pc)</span>
+            <span class="menu-card__price">$1.99</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Desserts</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Gulab Jamun (2pcs)</span>
+            <span class="menu-card__price">$3.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Masala Hut Special</span>
+            <span class="menu-card__price">$4.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Masala Hut Special Fruit Salad</span>
+            <span class="menu-card__price">$4.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Payasam</span>
+            <span class="menu-card__price">$2.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Rasmalai (2pcs)</span>
+            <span class="menu-card__price">$4.99</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="dining-drinks">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Refreshments</p>
+      <h2 class="menu-section__title">Drinks</h2>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Cold Drinks</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Coke</span>
+            <span class="menu-card__price">$1.29</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Sprite</span>
+            <span class="menu-card__price">$1.29</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Ginger Ale</span>
+            <span class="menu-card__price">$1.29</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Sunkist</span>
+            <span class="menu-card__price">$1.29</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Diet Coke</span>
+            <span class="menu-card__price">$1.29</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Coke Zero</span>
+            <span class="menu-card__price">$1.29</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Mint Lime</span>
+            <span class="menu-card__price">$3.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Fresh Lime</span>
+            <span class="menu-card__price">$3.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Mango Lassi</span>
+            <span class="menu-card__price">$4.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Butter Milk</span>
+            <span class="menu-card__price">$3.99</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Hot Drinks</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Tea</span>
+            <span class="menu-card__price">$2.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Coffee</span>
+            <span class="menu-card__price">$2.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Black Tea</span>
+            <span class="menu-card__price">$1.99</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Black Coffee</span>
+            <span class="menu-card__price">$1.99</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="menu-group" id="menu-group-catering" hidden>
+
+  <section class="menu-section" id="catering-heading" style="padding-bottom:0;">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Masala Hut</p>
+      <h2 class="menu-section__title menu-section__title--main">Catering Menu</h2>
+    </div>
+  </section>
+
+  <section class="menu-section" id="tea-snacks-drinks">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Bites &amp; Sips</p>
+      <h2 class="menu-section__title">Tea Snacks &amp; Welcome Drinks</h2>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Tea Snacks (Per Pc)</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Bonda</span>
+            <span class="menu-card__price">$1.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Pazham Pori</span>
+            <span class="menu-card__price">$1.75</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Parippu Vada</span>
+            <span class="menu-card__price">$1.25</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Uzhunnu Vada</span>
+            <span class="menu-card__price">$1.25</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Sukhiyan</span>
+            <span class="menu-card__price">$1.50</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kozhukatta</span>
+            <span class="menu-card__price">$1.50</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Neyyappam Small</span>
+            <span class="menu-card__price">$0.60</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Neyyappam</span>
+            <span class="menu-card__price">$2.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Ela Ada</span>
+            <span class="menu-card__price">$2.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Unnakaya</span>
+            <span class="menu-card__price">$1.50</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Vettu Cake</span>
+            <span class="menu-card__price">$1.25</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Welcome Drinks</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Mango Lassi (Gallon)</span>
+            <span class="menu-card__price">$30.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Sweet Lassi (Gallon)</span>
+            <span class="menu-card__price">$25.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Salt Lassi (Gallon)</span>
+            <span class="menu-card__price">$25.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Buttermilk (Gallon)</span>
+            <span class="menu-card__price">$25.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Ginger Ale Iced Tea (Gallon)</span>
+            <span class="menu-card__price">$20.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Mango Passion Fruit (Gallon)</span>
+            <span class="menu-card__price">$25.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Lemonade (Gallon)</span>
+            <span class="menu-card__price">$25.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Pink Lemonade (Gallon)</span>
+            <span class="menu-card__price">$25.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Mint Lime (Gallon)</span>
+            <span class="menu-card__price">$25.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Tea (Party Order)</span>
+            <span class="menu-card__price">$1.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Coffee (Party Order)</span>
+            <span class="menu-card__price">$1.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Black Tea (Party Order)</span>
+            <span class="menu-card__price">$1.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Black Coffee (Party Order)</span>
+            <span class="menu-card__price">$1.00</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="non-veg-appetizers">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Starters</p>
+      <h2 class="menu-section__title">Non Veg Appetizers</h2>
+    </div>
+
+    <div class="price-table fade-up">
+      <div class="price-table__headrow">
+        <span class="price-table__name-col">Item</span>
+        <span class="price-table__price-col">Full Tray</span>
+        <span class="price-table__price-col">3/4 Tray</span>
+        <span class="price-table__price-col">1/2 Tray</span>
+        <span class="price-table__price-col">1/4 Tray</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken 75</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken 65</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$115.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Hyderabadi Chicken 65</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Nadan Chicken Fry</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$50.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Perattu</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$115.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Roast</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chilli Chicken</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Pepper Chicken</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Manchurian</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Beef Fry</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chilli Beef</span>
+        <span class="price-table__price">$300.00</span>
+        <span class="price-table__price">$225.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$75.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Beef Roast</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Beef Boti</span>
+        <span class="price-table__price">$260.00</span>
+        <span class="price-table__price">$195.00</span>
+        <span class="price-table__price">$130.00</span>
+        <span class="price-table__price">$65.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Beef Liver Fry</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Pork Fry</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$50.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Pork Soy Pepper</span>
+        <span class="price-table__price">$240.00</span>
+        <span class="price-table__price">$180.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$60.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Pork Kandari Fry</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chilli Pork</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Anchovy Fry</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Garlic Shrimp</span>
+        <span class="price-table__price">$350.00</span>
+        <span class="price-table__price">$265.00</span>
+        <span class="price-table__price">$175.00</span>
+        <span class="price-table__price">$90.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chilli Garlic Shrimp</span>
+        <span class="price-table__price">$300.00</span>
+        <span class="price-table__price">$225.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$75.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Shrimp Roast</span>
+        <span class="price-table__price">$300.00</span>
+        <span class="price-table__price">$225.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$75.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Shrimp Tawa Fry</span>
+        <span class="price-table__price">$350.00</span>
+        <span class="price-table__price">$265.00</span>
+        <span class="price-table__price">$175.00</span>
+        <span class="price-table__price">$90.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chilli Fish (Salmon, King Fish)</span>
+        <span class="price-table__price">$240.00</span>
+        <span class="price-table__price">$180.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$60.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Crab Roast</span>
+        <span class="price-table__price">$300.00</span>
+        <span class="price-table__price">$225.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$75.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Koondal Roast</span>
+        <span class="price-table__price">$300.00</span>
+        <span class="price-table__price">$225.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$75.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Kada Mutta Masala</span>
+        <span class="price-table__price">$250.00</span>
+        <span class="price-table__price">$187.50</span>
+        <span class="price-table__price">$125.00</span>
+        <span class="price-table__price">$62.50</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Meat Ball Manchurian</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Snacks &amp; Cutlets (Per Pc)</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Beef Cutlet</span>
+            <span class="menu-card__price">$2.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Cutlet</span>
+            <span class="menu-card__price">$1.75</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Fish Cutlet</span>
+            <span class="menu-card__price">$1.75</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Meat Roll</span>
+            <span class="menu-card__price">$2.50</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Beef Meat Roll</span>
+            <span class="menu-card__price">$2.50</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Fish Pollichathu</span>
+            <span class="menu-card__price">$9.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Thai Shrimp Roll</span>
+            <span class="menu-card__price">$1.75</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Fish Tawa Fry</span>
+            <span class="menu-card__price">$9.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kada Fry</span>
+            <span class="menu-card__price">$8.00</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Bites &amp; Bundles (Per Pc)</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Lollipop</span>
+            <span class="menu-card__price">$3.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Samosa</span>
+            <span class="menu-card__price">$2.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Beef Samosa</span>
+            <span class="menu-card__price">$2.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Wings</span>
+            <span class="menu-card__price">$1.50</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Momos</span>
+            <span class="menu-card__price">$1.25</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Meat Ball</span>
+            <span class="menu-card__price">$1.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Shrimp Tempura</span>
+            <span class="menu-card__price">$1.50</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Butterfly Shrimp</span>
+            <span class="menu-card__price">$2.00</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Whole Salmon</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Baked Whole Salmon with Indian Masala</span>
+            <span class="menu-card__price">$350.00</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="veg-appetizers">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Starters</p>
+      <h2 class="menu-section__title">Veg Appetizers</h2>
+    </div>
+
+    <div class="price-table fade-up">
+      <div class="price-table__headrow">
+        <span class="price-table__name-col">Item</span>
+        <span class="price-table__price-col">Full Tray</span>
+        <span class="price-table__price-col">3/4 Tray</span>
+        <span class="price-table__price-col">1/2 Tray</span>
+        <span class="price-table__price-col">1/4 Tray</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Gobi Manchurian</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Manchurian Ball</span>
+        <span class="price-table__price">$140.00</span>
+        <span class="price-table__price">$105.00</span>
+        <span class="price-table__price">$70.00</span>
+        <span class="price-table__price">$35.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chilli Paneer</span>
+        <span class="price-table__price">$140.00</span>
+        <span class="price-table__price">$105.00</span>
+        <span class="price-table__price">$70.00</span>
+        <span class="price-table__price">$35.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Gobi 65</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chilli Gobi</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Onion Pakora</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Samosas &amp; Cutlets (Per Pc)</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Veg Samosa</span>
+            <span class="menu-card__price">$1.75</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Veg Samosa Medium Size</span>
+            <span class="menu-card__price">$1.50</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Veg Cocktail Samosa</span>
+            <span class="menu-card__price">$1.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Veg Cutlet</span>
+            <span class="menu-card__price">$1.50</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Thai Veg Spring Roll</span>
+            <span class="menu-card__price">$1.50</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="salads-sides">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Fresh &amp; Light</p>
+      <h2 class="menu-section__title">Salads &amp; Sides</h2>
+    </div>
+
+    <div class="price-table fade-up">
+      <div class="price-table__headrow">
+        <span class="price-table__name-col">Item</span>
+        <span class="price-table__price-col">Full Tray</span>
+        <span class="price-table__price-col">3/4 Tray</span>
+        <span class="price-table__price-col">1/2 Tray</span>
+        <span class="price-table__price-col">1/4 Tray</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Onion Salad</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$40.00</span>
+        <span class="price-table__price">$20.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Italian Salad</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$40.00</span>
+        <span class="price-table__price">$20.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chickpea Salad</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$45.00</span>
+        <span class="price-table__price">$30.00</span>
+        <span class="price-table__price">$15.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Mediterranean Chickpea Salad</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$50.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Peanut Salad</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$50.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Tropical Mango Salad</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$50.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Raita</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$40.00</span>
+        <span class="price-table__price">$20.00</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="veg-egg">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Mains</p>
+      <h2 class="menu-section__title">Veg &amp; Egg</h2>
+    </div>
+
+    <div class="price-table fade-up">
+      <div class="price-table__headrow">
+        <span class="price-table__name-col">Item</span>
+        <span class="price-table__price-col">Full Tray</span>
+        <span class="price-table__price-col">3/4 Tray</span>
+        <span class="price-table__price-col">1/2 Tray</span>
+        <span class="price-table__price-col">1/4 Tray</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Veg Stew</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Veg Korma</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Paneer Tikka Masala</span>
+        <span class="price-table__price">$140.00</span>
+        <span class="price-table__price">$105.00</span>
+        <span class="price-table__price">$70.00</span>
+        <span class="price-table__price">$35.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Butter Paneer</span>
+        <span class="price-table__price">$140.00</span>
+        <span class="price-table__price">$105.00</span>
+        <span class="price-table__price">$70.00</span>
+        <span class="price-table__price">$35.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Matar Paneer</span>
+        <span class="price-table__price">$140.00</span>
+        <span class="price-table__price">$105.00</span>
+        <span class="price-table__price">$70.00</span>
+        <span class="price-table__price">$35.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Kadai Paneer</span>
+        <span class="price-table__price">$140.00</span>
+        <span class="price-table__price">$105.00</span>
+        <span class="price-table__price">$70.00</span>
+        <span class="price-table__price">$35.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Palak Paneer</span>
+        <span class="price-table__price">$140.00</span>
+        <span class="price-table__price">$105.00</span>
+        <span class="price-table__price">$70.00</span>
+        <span class="price-table__price">$35.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chana Masala</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Potato Bhaji</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Dal Curry</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$50.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Aloo Chana</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Aloo Sag</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Egg Curry (50 pc Full Tray)</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$50.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Egg Roast (50 pc Full Tray)</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="chicken-duck">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Poultry</p>
+      <h2 class="menu-section__title">Chicken &amp; Duck</h2>
+    </div>
+
+    <div class="price-table fade-up">
+      <div class="price-table__headrow">
+        <span class="price-table__name-col">Item</span>
+        <span class="price-table__price-col">Full Tray</span>
+        <span class="price-table__price-col">3/4 Tray</span>
+        <span class="price-table__price-col">1/2 Tray</span>
+        <span class="price-table__price-col">1/4 Tray</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Curry</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$115.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Varutharacha</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Mappas</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Vindaloo</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Korma</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Stew</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$115.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Kadai Chicken</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Butter Chicken</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$115.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Tikka Masala</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$115.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Duck Roast</span>
+        <span class="price-table__price">$240.00</span>
+        <span class="price-table__price">$180.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$60.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Duck Curry</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Duck Mappas</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Duck Stew</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="beef-pork">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">From the Butcher</p>
+      <h2 class="menu-section__title">Beef &amp; Pork</h2>
+    </div>
+
+    <div class="price-table fade-up">
+      <div class="price-table__headrow">
+        <span class="price-table__name-col">Item</span>
+        <span class="price-table__price-col">Full Tray</span>
+        <span class="price-table__price-col">3/4 Tray</span>
+        <span class="price-table__price-col">1/2 Tray</span>
+        <span class="price-table__price-col">1/4 Tray</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Beef Curry</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Beef Vindaloo</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Beef Stew</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$50.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Beef Korma</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Beef Mappas</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Beef Chaps</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Beef Varutharacha</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Pork Curry</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$50.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Pork Mappas</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$50.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Pork Vindaloo</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$50.00</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="goat">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Kerala Style</p>
+      <h2 class="menu-section__title">Goat</h2>
+    </div>
+
+    <div class="price-table fade-up">
+      <div class="price-table__headrow">
+        <span class="price-table__name-col">Item</span>
+        <span class="price-table__price-col">Full Tray</span>
+        <span class="price-table__price-col">3/4 Tray</span>
+        <span class="price-table__price-col">1/2 Tray</span>
+        <span class="price-table__price-col">1/4 Tray</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Goat Curry</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Goat Korma</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Goat Stew</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$50.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Goat Vindaloo</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Goat Pepper Fry</span>
+        <span class="price-table__price">$240.00</span>
+        <span class="price-table__price">$180.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$60.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Baby Goat Curry</span>
+        <span class="price-table__price">$320.00</span>
+        <span class="price-table__price">$240.00</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$80.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Baby Goat Korma</span>
+        <span class="price-table__price">$320.00</span>
+        <span class="price-table__price">$240.00</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$80.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Baby Goat Stew</span>
+        <span class="price-table__price">$300.00</span>
+        <span class="price-table__price">$225.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$75.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Baby Goat Vindaloo</span>
+        <span class="price-table__price">$320.00</span>
+        <span class="price-table__price">$240.00</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$80.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Baby Goat Pepper Fry</span>
+        <span class="price-table__price">$340.00</span>
+        <span class="price-table__price">$255.00</span>
+        <span class="price-table__price">$170.00</span>
+        <span class="price-table__price">$85.00</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="sea-food">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">From the Coast</p>
+      <h2 class="menu-section__title">Sea Food</h2>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Curries &amp; Molly (Per Pc)</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kerala Fish Curry (Kingfish)</span>
+            <span class="menu-card__price">$2.50</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kerala Fish Curry (Salmon)</span>
+            <span class="menu-card__price">$3.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Fish Molly (Kingfish)</span>
+            <span class="menu-card__price">$6.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Fish Mapas (Kingfish)</span>
+            <span class="menu-card__price">$6.00</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="price-table fade-up" style="margin-top:40px;">
+      <div class="price-table__headrow">
+        <span class="price-table__name-col">Item</span>
+        <span class="price-table__price-col">Full Tray</span>
+        <span class="price-table__price-col">3/4 Tray</span>
+        <span class="price-table__price-col">1/2 Tray</span>
+        <span class="price-table__price-col">1/4 Tray</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Fish Mango Curry (45 pc / 35 pc / 25 pc / 15 pc)</span>
+        <span class="price-table__price">$140.00</span>
+        <span class="price-table__price">$105.00</span>
+        <span class="price-table__price">$70.00</span>
+        <span class="price-table__price">$35.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Shrimp Curry</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Shrimp Molly</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Shrimp Tikka Masala</span>
+        <span class="price-table__price">$220.00</span>
+        <span class="price-table__price">$165.00</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$55.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Shrimp Masala</span>
+        <span class="price-table__price">$300.00</span>
+        <span class="price-table__price">$225.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$75.00</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="biriyani">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">House Special</p>
+      <h2 class="menu-section__title">Biriyani</h2>
+    </div>
+
+    <div class="price-table fade-up">
+      <div class="price-table__headrow">
+        <span class="price-table__name-col">Item</span>
+        <span class="price-table__price-col">Full Tray</span>
+        <span class="price-table__price-col">3/4 Tray</span>
+        <span class="price-table__price-col">1/2 Tray</span>
+        <span class="price-table__price-col">1/4 Tray</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Biryani</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$115.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Goat Biryani</span>
+        <span class="price-table__price">$180.00</span>
+        <span class="price-table__price">$135.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$45.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Beef Biryani</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$50.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Shrimp Biryani</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$50.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Fish Biryani (King Fish 25 pc)</span>
+        <span class="price-table__price">$240.00</span>
+        <span class="price-table__price">$180.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$60.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Veg Biryani</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Kappa Biryani</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="fried-rice">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Rice Bowls</p>
+      <h2 class="menu-section__title">Rice &amp; Fried Rice</h2>
+    </div>
+
+    <div class="price-table fade-up">
+      <div class="price-table__headrow">
+        <span class="price-table__name-col">Item</span>
+        <span class="price-table__price-col">Full Tray</span>
+        <span class="price-table__price-col">3/4 Tray</span>
+        <span class="price-table__price-col">1/2 Tray</span>
+        <span class="price-table__price-col">1/4 Tray</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Kerala Rice</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$45.00</span>
+        <span class="price-table__price">$30.00</span>
+        <span class="price-table__price">$15.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Plain Basmati Rice</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$40.00</span>
+        <span class="price-table__price">$20.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Veg Pulao</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$50.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Veg Fried Rice</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$40.00</span>
+        <span class="price-table__price">$20.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Egg Fried Rice</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$70.00</span>
+        <span class="price-table__price">$45.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Fried Rice</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$50.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Shrimp Fried Rice</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$85.00</span>
+        <span class="price-table__price">$55.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Mixed Fried Rice</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Alfredo Pine Pasta</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$50.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Pidi</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$50.00</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="noodles">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Indo-Chinese</p>
+      <h2 class="menu-section__title">Noodles</h2>
+    </div>
+
+    <div class="price-table fade-up">
+      <div class="price-table__headrow">
+        <span class="price-table__name-col">Item</span>
+        <span class="price-table__price-col">Full Tray</span>
+        <span class="price-table__price-col">3/4 Tray</span>
+        <span class="price-table__price-col">1/2 Tray</span>
+        <span class="price-table__price-col">1/4 Tray</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Veg Hakka Noodles</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$40.00</span>
+        <span class="price-table__price">$20.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Egg Hakka Noodles</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$70.00</span>
+        <span class="price-table__price">$45.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Hakka Noodles</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$50.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Shrimp Hakka Noodles</span>
+        <span class="price-table__price">$110.00</span>
+        <span class="price-table__price">$85.00</span>
+        <span class="price-table__price">$55.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Mixed Hakka Noodles</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="bread-times">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Fresh Baked</p>
+      <h2 class="menu-section__title">Bread Times</h2>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Breads (Per Pc)</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Appam</span>
+            <span class="menu-card__price">$1.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Palappam</span>
+            <span class="menu-card__price">$2.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kerala Parotta</span>
+            <span class="menu-card__price">$1.75</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chapati</span>
+            <span class="menu-card__price">$1.75</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Puri</span>
+            <span class="menu-card__price">$1.75</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Idiyappam</span>
+            <span class="menu-card__price">$2.00</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="price-table fade-up" style="margin-top:40px;">
+      <div class="price-table__headrow">
+        <span class="price-table__name-col">Item</span>
+        <span class="price-table__price-col">Full Tray</span>
+        <span class="price-table__price-col">3/4 Tray</span>
+        <span class="price-table__price-col">1/2 Tray</span>
+        <span class="price-table__price-col">1/4 Tray</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chilli Parotta</span>
+        <span class="price-table__price">$140.00</span>
+        <span class="price-table__price">$105.00</span>
+        <span class="price-table__price">$70.00</span>
+        <span class="price-table__price">$35.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chicken Chilli Parotta</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Kottu Parotta Egg</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$112.50</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$37.50</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Kottu Parotta Chicken</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Kottu Parotta Beef</span>
+        <span class="price-table__price">$180.00</span>
+        <span class="price-table__price">$135.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$45.00</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="desserts">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Something Sweet</p>
+      <h2 class="menu-section__title">Desserts</h2>
+    </div>
+
+    <div class="price-table fade-up">
+      <div class="price-table__headrow">
+        <span class="price-table__name-col">Item</span>
+        <span class="price-table__price-col">Full Tray</span>
+        <span class="price-table__price-col">3/4 Tray</span>
+        <span class="price-table__price-col">1/2 Tray</span>
+        <span class="price-table__price-col">1/4 Tray</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Masala Hut Special Tuty Fruity</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">----------</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">----------</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Masala Hut Special Fruit Salad</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$112.50</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$37.50</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chocolate Oreo Bliss</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">----------</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">----------</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Semiya Payasam</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Ada Payasam</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Parippu Payasam</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Mithai Chaat</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$112.50</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$37.50</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Gajar Halwa</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$112.50</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$37.50</span>
+      </div>
+    </div>
+
+    <div class="menu-grid" style="margin-top:16px;">
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Sweets (Per Pc)</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Rasagula</span>
+            <span class="menu-card__price">$1.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Gulab Jamun</span>
+            <span class="menu-card__price">$1.00</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Rasamalai</span>
+            <span class="menu-card__price">$1.50</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Tables &amp; Ice Creams</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Ice Creams</span>
+            <span class="menu-card__price">MP</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Fruit Table</span>
+            <span class="menu-card__price">MP</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Sweets Table</span>
+            <span class="menu-card__price">MP</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="kerala-menu">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Traditional Favorites</p>
+      <h2 class="menu-section__title">Kerala Menu</h2>
+    </div>
+
+    <div class="price-table fade-up">
+      <div class="price-table__headrow">
+        <span class="price-table__name-col">Item</span>
+        <span class="price-table__price-col">Full Tray</span>
+        <span class="price-table__price-col">3/4 Tray</span>
+        <span class="price-table__price-col">1/2 Tray</span>
+        <span class="price-table__price-col">1/4 Tray</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Fish Peera (Anchovy)</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$50.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Beans Thoran</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Vazhachundu Payar Thoran</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Beetroot Thoran</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Cabbage Thoran</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$50.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Avial</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Moru Curry / Pulissery</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$40.00</span>
+        <span class="price-table__price">$20.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Sambar</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$40.00</span>
+        <span class="price-table__price">$20.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Mango Pickle</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$50.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Lemon Pickle</span>
+        <span class="price-table__price">$140.00</span>
+        <span class="price-table__price">$105.00</span>
+        <span class="price-table__price">$70.00</span>
+        <span class="price-table__price">$35.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chammanthi</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Angamali Mango Curry</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Rasam</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$40.00</span>
+        <span class="price-table__price">$20.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Mathura Curry</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Pachadi</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Kichadi</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chemmeen Mango Curry</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Puli Inji</span>
+        <span class="price-table__price">$160.00</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$40.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Olan</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$50.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Erissery</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Theeyal</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Kadala Curry</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$40.00</span>
+        <span class="price-table__price">$20.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Parippu Curry</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$40.00</span>
+        <span class="price-table__price">$20.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Cherupayar Thoran</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$50.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Cherupayar Curry</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$40.00</span>
+        <span class="price-table__price">$20.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Green Peas Curry</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$40.00</span>
+        <span class="price-table__price">$20.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Vazhakka Payar Thoran</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Vazhakka Mezhukkupuratti</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Kappa</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Paalkappa</span>
+        <span class="price-table__price">$140.00</span>
+        <span class="price-table__price">$105.00</span>
+        <span class="price-table__price">$70.00</span>
+        <span class="price-table__price">$35.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chendan Kappa</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$75.00</span>
+        <span class="price-table__price">$50.00</span>
+        <span class="price-table__price">$25.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chakka</span>
+        <span class="price-table__price">$200.00</span>
+        <span class="price-table__price">$150.00</span>
+        <span class="price-table__price">$100.00</span>
+        <span class="price-table__price">$50.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Chembu</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Sweet Potato</span>
+        <span class="price-table__price">$80.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$40.00</span>
+        <span class="price-table__price">$20.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Mushroom Thoran</span>
+        <span class="price-table__price">$140.00</span>
+        <span class="price-table__price">$105.00</span>
+        <span class="price-table__price">$70.00</span>
+        <span class="price-table__price">$35.00</span>
+      </div>
+      <div class="price-table__row">
+        <span class="price-table__name">Payar Thoran</span>
+        <span class="price-table__price">$120.00</span>
+        <span class="price-table__price">$90.00</span>
+        <span class="price-table__price">$60.00</span>
+        <span class="price-table__price">$30.00</span>
+      </div>
+    </div>
+
+    <div class="menu-grid" style="margin-top:16px;">
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Market Price</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Steamed Plantain</span>
+            <span class="menu-card__price">MP</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="english-menu">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Continental</p>
+      <h2 class="menu-section__title">English Menu</h2>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <span class="menu-card__heading">Breakfast &amp; Sides</span>
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Scrambled Egg</span>
+            <span class="menu-card__price">MP</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Boiled Egg</span>
+            <span class="menu-card__price">MP</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Sausage</span>
+            <span class="menu-card__price">MP</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Bacon</span>
+            <span class="menu-card__price">MP</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Pancake</span>
+            <span class="menu-card__price">MP</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Waffles</span>
+            <span class="menu-card__price">MP</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">French Fries</span>
+            <span class="menu-card__price">MP</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Home Fries</span>
+            <span class="menu-card__price">MP</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Potato Wedges</span>
+            <span class="menu-card__price">MP</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Dinner Roll</span>
+            <span class="menu-card__price">$2.00</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="menu-group" id="menu-group-live" hidden>
+
+  <section class="menu-section" id="live-catering">
+    <div class="menu-section__intro fade-up">
+      <p class="menu-section__kicker">Cooked Fresh at Your Event</p>
+      <h2 class="menu-section__title menu-section__title--main">Live Catering Menu</h2>
+    </div>
+
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken 65</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken 75</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Lollipop</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Nadan Chicken Fry</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Kababs BBQ</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Wings</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Momos</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Meat Roll</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chicken Samosa</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kada Fry</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Beef Meat Roll</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Beef Samosa</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Beef Ribs BBQ</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Pork Ribs BBQ</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Burger, Hotdogs, Corn BBQ</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Shrimp Tawa Fry</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Shrimp Tempura</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Butterfly Shrimp</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Fish Tawa Fry</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Anchovy Fry</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="menu-card fade-up">
+        <ul class="menu-card__list">
+          <li class="menu-card__item">
+            <span class="menu-card__name">Samosa</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Cocktail Samosa</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Veg Thai Spring Roll</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Gobi Manchurian</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Gobi 65</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Pazham Pori</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Green Peas Egg Masala</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Omelette Station</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Pani Puri Station</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Bhelpuri Station</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Dosa Station</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kerala Parotta</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Appam</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Paal Appam</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Puri</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Kottu Parotta</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Chilli Parotta</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Pasta Station</span>
+          </li>
+          <li class="menu-card__item">
+            <span class="menu-card__name">Taco Station</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <footer class="footer" id="contact">
+    <div class="footer__frame">
+      <div class="footer__grid">
+        <ul class="footer__nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="service.html">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="https://masalahuts.cloveronline.com/menu/all">Order Online</a></li>
+        </ul>
+
+        <div class="footer__main">
+          <div class="footer__logo">
+            <img src="logo_clean_resized.png" alt="Masala Hut logo">
+          </div>
+
+          <div class="footer__info">
+            <h3 class="footer__brand-name">Masala Hut</h3>
+            <p><strong>Address:</strong> 732 Murphy Rd, Stafford, TX 77477</p>
+            <p><strong>Booking:</strong> masalahut732@gmail.com</p>
+            <p><span class="footer__nowrap"><strong>Call:</strong> (281) 499-7381</span><br>
+              <span class="footer__nowrap"><strong>WhatsApp:</strong> (713) 438-2162</span>
+            </p>
+            <p class="footer__hours">
+              Tue&ndash;Thu &amp; Sun: 11 AM&ndash;3 PM, 5 PM&ndash;9 PM<br>
+              Fri &amp; Sat: 11 AM&ndash;3 PM, 5 PM&ndash;10 PM<br>
+              <span class="footer__nowrap">Closed 3&ndash;5 PM daily</span>
+            </p>
+          </div>
+        </div>
+
+        <ul class="footer__social">
+          <li><a href="https://www.facebook.com/profile.php?id=61573770681213" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.instagram.com/masala_hutt/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://wa.me/17134382162" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__bottom">
+        &copy; 2026 <b>Masala Hut Restaurant</b>. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <ul class="social-float" id="socialFloat" aria-label="Social media"></ul>
+
+  <script>
+    // Dining Menu / Catering Menu / Live Catering toggle
+    (function () {
+      const tabs = [
+        { btn: document.getElementById('toggleDining'), group: document.getElementById('menu-group-dining') },
+        { btn: document.getElementById('toggleCatering'), group: document.getElementById('menu-group-catering') },
+        { btn: document.getElementById('toggleLive'), group: document.getElementById('menu-group-live') }
+      ];
+      if (tabs.some(t => !t.btn || !t.group)) return;
+
+      function show(active) {
+        tabs.forEach(t => {
+          const on = t === active;
+          t.group.hidden = !on;
+          t.btn.classList.toggle('is-active', on);
+          t.btn.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+      }
+
+      tabs.forEach(t => t.btn.addEventListener('click', () => show(t)));
+    })();
+
+    const navClose = document.getElementById('navClose');
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    if (navClose) {
+      navClose.addEventListener('click', () => links.classList.remove('open'));
+    }
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+    const nav = document.querySelector('.nav');
+    const setNavState = () => {
+      nav.classList.toggle('is-scrolled', window.scrollY > 12);
+    };
+    setNavState();
+    window.addEventListener('scroll', setNavState, { passive: true });
+
+    // Gentle parallax drift on the hero image as the page scrolls
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const heroBg = document.querySelector('.menu-hero__bg');
+    const heroSection = document.querySelector('.menu-hero');
+
+    if (heroBg && heroSection && !prefersReducedMotion) {
+      let heroTicking = false;
+      const applyParallax = () => {
+        const rect = heroSection.getBoundingClientRect();
+        if (rect.bottom > 0 && rect.top < window.innerHeight) {
+          const shift = Math.min(window.scrollY * 0.12, 60);
+          heroBg.style.backgroundPosition = `center calc(42% + ${shift}px)`;
+        }
+        heroTicking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!heroTicking) {
+          window.requestAnimationFrame(applyParallax);
+          heroTicking = true;
+        }
+      }, { passive: true });
+      applyParallax();
+    }
+
+    // Hide the fixed watermark while the hero or footer is in view
+    const watermark = document.querySelector('.site-watermark');
+    const heroEl = document.querySelector('.menu-hero');
+    const footerEl = document.querySelector('.footer');
+
+    if (watermark && (heroEl || footerEl)) {
+      const hiddenZones = new Set();
+      const zoneObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            hiddenZones.add(entry.target);
+          } else {
+            hiddenZones.delete(entry.target);
+          }
+        });
+        watermark.classList.toggle('is-hidden', hiddenZones.size > 0);
+      }, { threshold: 0 });
+
+      if (heroEl) zoneObserver.observe(heroEl);
+      if (footerEl) zoneObserver.observe(footerEl);
+    }
+
+    // Scroll-triggered fade-up reveal for menu section content
+    const fadeUpEls = document.querySelectorAll('.fade-up');
+    if (fadeUpEls.length) {
+      if (prefersReducedMotion) {
+        fadeUpEls.forEach(el => el.classList.add('is-visible'));
+      } else {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              const delay = (i % 6) * 70;
+              setTimeout(() => el.classList.add('is-visible'), delay);
+              revealObserver.unobserve(el);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        fadeUpEls.forEach(el => revealObserver.observe(el));
+      }
+    }
+
+
+    // Floating social icons: links pulled from the footer (defaults if none); hide on scroll, return at top
+    (function () {
+      const float = document.getElementById('socialFloat');
+      if (!float) return;
+      const icons = {
+        facebook: '<path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/>',
+        instagram: '<path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6zM17.25 5.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>',
+        whatsapp: '<path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.95L2 22l5.2-1.36A9.93 9.93 0 1 0 12.04 2zm0 18.1c-1.5 0-2.97-.4-4.25-1.16l-.3-.18-3.08.8.82-3-.2-.31a8.1 8.1 0 1 1 7.01 3.85zm4.45-6.07c-.24-.12-1.44-.71-1.66-.79-.22-.08-.39-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.72-.65-1.21-1.45-1.35-1.69-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.32-.75-1.8-.2-.47-.4-.41-.55-.42h-.47c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28z"/>'
+      };
+      const labels = { facebook: 'Facebook', instagram: 'Instagram', whatsapp: 'WhatsApp' };
+      const defaults = {
+        facebook: 'https://www.facebook.com/profile.php?id=61573770681213',
+        instagram: 'https://www.instagram.com/masala_hutt/',
+        whatsapp: 'https://wa.me/17134382162'
+      };
+      const found = {};
+      document.querySelectorAll('.footer__social a').forEach(a => {
+        const h = a.href;
+        const key = h.includes('facebook') ? 'facebook' : h.includes('instagram') ? 'instagram' : h.includes('wa.me') ? 'whatsapp' : null;
+        if (key) found[key] = h;
+      });
+      Object.keys(icons).forEach(key => {
+        const href = found[key] || defaults[key];
+        const li = document.createElement('li');
+        li.innerHTML = '<a href="' + href + '" target="_blank" rel="noopener" aria-label="' + labels[key] + '">' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true">' + icons[key] + '</svg></a>';
+        float.appendChild(li);
+      });
+
+      const toggleSocial = () => float.classList.toggle('is-hidden', window.scrollY > 12);
+      toggleSocial();
+      window.addEventListener('scroll', toggleSocial, { passive: true });
+    })();
+  </script>
+
+</body>
+
+</html>
